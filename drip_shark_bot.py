@@ -1,9 +1,10 @@
 import logging
+import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 
 # === НАСТРОЙКИ ===
-BOT_TOKEN = "8788049390:AAF02YW9fROG5dDKqzneDT4gwvxj_NNe9ro"
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 ADMIN_CHAT_ID = 741159183  # твой chat ID
 # =================
 
