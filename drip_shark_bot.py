@@ -36,8 +36,8 @@ async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     await message.reply_text(
-        "Спасибо! Твой заказ принят 🦈\n"
-        "Мы свяжемся с тобой в ближайшее время."
+        "Спасибо! Твой запрос принят 🦈\n"
+        "В ближайшее время свяжемся с тобой для уточнения деталей!"
     )
 
 if __name__ == "__main__":
