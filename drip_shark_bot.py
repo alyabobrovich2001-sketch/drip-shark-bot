@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, fil
 
 # === НАСТРОЙКИ ===
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
-ADMIN_CHAT_ID = 741159183
+ADMIN_CHAT_ID = 8815125744
 # =================
 
 logging.basicConfig(level=logging.INFO)
