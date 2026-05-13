@@ -1,20 +1,27 @@
 import logging
 import os
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters, ContextTypes
 
 # === НАСТРОЙКИ ===
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
-ADMIN_CHAT_ID = 741159183  # твой chat ID
+ADMIN_CHAT_ID = 741159183
 # =================
 
 logging.basicConfig(level=logging.INFO)
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "Привет! Мы — Drip Shark 🦈\n\n"
+        "Оригинальный стритвир прямо из Рима 🇮🇹\n"
+        "Stone Island, Carhartt, Nike, Adidas и не только.\n\n"
+        "Напиши что тебя интересует — и мы свяжемся с тобой в ближайшее время 👇"
+    )
 
 async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     message = update.message
 
-    # Формируем уведомление админу
     notification = (
         f"📦 Новый заказ!\n\n"
         f"👤 От: {user.full_name}"
@@ -23,13 +30,11 @@ async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"💬 Сообщение:\n{message.text}"
     )
 
-    # Отправляем уведомление админу
     await context.bot.send_message(
         chat_id=ADMIN_CHAT_ID,
         text=notification
     )
 
-    # Отвечаем покупателю
     await message.reply_text(
         "Спасибо! Твой заказ принят 🦈\n"
         "Мы свяжемся с тобой в ближайшее время."
@@ -37,6 +42,7 @@ async def forward_to_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, forward_to_admin))
     print("Бот запущен ✅")
     app.run_polling()
