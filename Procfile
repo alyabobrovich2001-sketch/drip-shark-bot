@@ -1,1 +1,1 @@
-worker: python drip_shark_bot.py
+web: python drip_shark_bot.py
